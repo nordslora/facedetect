@@ -1,11 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.IO;
+using static System.Console;
+using static System.IO.Directory;
+using static System.IO.Path;
+using static System.Environment;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+
 // 2020-02-05 TL edit
 // Quickstart: Detect faces in an image using the Face REST API and C#
 // https://docs.microsoft.com/en-us/azure/cognitive-services/face/quickstarts/csharp
@@ -21,30 +23,30 @@ namespace DetectFace
         static void Main(string[] args)
         {
             // Get the path and filename to process from the user.
-            Console.WriteLine("Detect faces:");
-            // Console.Write("Enter the path to an image with faces that you wish to analyze: ");
+            WriteLine("*** Detect faces ***");
+            // Write("Enter the path to an image with faces that you wish to analyze: ");
             // string imageFilePath = Console.ReadLine();
             var imageFilePath = @"c:\woman.jpg";
-            Console.WriteLine(imageFilePath);
+            WriteLine("Input file: " + imageFilePath);
             FileInfo fi = new FileInfo(imageFilePath);
             if (File.Exists(imageFilePath))
             {
                 try
                 {
-                    Console.WriteLine("\nInput file exists.\n");
+                    WriteLine("Input file exists.");
                     double size = fi.Length;
-                    Console.WriteLine("File Size in Bytes: {0}", size);
+                    WriteLine("Input file's size in Bytes: {0}", size);
                     MakeAnalysisRequest(imageFilePath);
-                    Console.WriteLine("\nWait a moment for the results to appear.\n");
+                    WriteLine("\nWait a moment for the results to appear.\n");
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("\n" + e.Message + "\nPress Enter to exit...\n");
+                    WriteLine("\n" + e.Message + "\nPress Enter to exit...\n");
                 }
             }
             else
             {
-                Console.WriteLine("\nInvalid file path.\nPress Enter to exit...\n");
+                WriteLine("\nInvalid file path.\nPress Enter to exit...\n");
             }
             Console.ReadLine();
         }
@@ -63,7 +65,7 @@ namespace DetectFace
 
             // Assemble the URI for the REST API Call.
             string uri = uriBase + "?" + requestParameters;
-            Console.WriteLine(uri);
+            WriteLine(uri);
             HttpResponseMessage response;
 
             // Request body. Posts a locally stored JPEG image.
@@ -78,17 +80,19 @@ namespace DetectFace
 
                 // Execute the REST API call.
                 response = await client.PostAsync(uri, content);
-                Console.WriteLine("Uri: " + uri);
-                Console.WriteLine("Content: " + content);
-                Console.WriteLine("Response: " + response);
+                WriteLine("Uri: " + uri);
+                WriteLine("Content: " + content);
+                WriteLine("Response: " + response);
                 // Get the JSON response.
                 string contentString = await response.Content.ReadAsStringAsync();
-                Console.WriteLine("\nContentString:\n");
-                Console.WriteLine(contentString);
+                WriteLine("\nContentString:\n");
+                WriteLine(contentString);
                 // Display the JSON response.
-                Console.WriteLine("\nResponse:\n");
-                Console.WriteLine(JsonPrettyPrint(contentString));
-                Console.WriteLine("\nPress Enter to exit...");
+                WriteLine("\nResponse:\n");
+                string jsonoutput = JsonPrettyPrint(contentString);
+                WriteLine(jsonoutput);
+                WriteToFile(jsonoutput);
+                WriteLine("\nPress Enter to exit...");
             }
         }
         // Returns the contents of the specified file as a byte array.
@@ -162,5 +166,33 @@ namespace DetectFace
             }
             return sb.ToString().Trim();
         }
-    } // program
-} // namespace
+
+        static void WriteToFile(string json)
+        {
+            // define a directory path to output files
+            // starting in the user's folder
+            var dir = Combine(
+              GetFolderPath(SpecialFolder.Personal), "json");
+
+            CreateDirectory(dir);
+
+            // define file paths
+            string textFile = Combine(dir, "face.json");
+            WriteLine($"Writing to: {textFile}");
+
+            // create a new text file and write a line to it 
+            StreamWriter textWriter = File.CreateText(textFile);
+            textWriter.WriteLine(json);
+            textWriter.Close();
+
+            // Managing paths
+            WriteLine($"Folder Name: {GetDirectoryName(textFile)}");
+            WriteLine($"File Name: {GetFileName(textFile)}");
+            // Getting file information
+            var info = new FileInfo(textFile);
+            WriteLine($"Contains {info.Length} bytes");
+            WriteLine($"Last accessed {info.LastAccessTime}");
+            WriteLine($"Has readonly set to {info.IsReadOnly}");
+        }
+    }
+}
