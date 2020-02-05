@@ -1,0 +1,14 @@
+C:\Users\glasspaper\Documents\c-sharp\_projects\FaceDetection\bin\Debug\FaceDetection.exe.config
+C:\Users\glasspaper\Documents\c-sharp\_projects\FaceDetection\bin\Debug\FaceDetection.exe
+C:\Users\glasspaper\Documents\c-sharp\_projects\FaceDetection\bin\Debug\FaceDetection.pdb
+C:\Users\glasspaper\Documents\c-sharp\_projects\FaceDetection\obj\Debug\FaceDetection.csprojAssemblyReference.cache
+C:\Users\glasspaper\Documents\c-sharp\_projects\FaceDetection\obj\Debug\FaceDetection.exe
+C:\Users\glasspaper\Documents\c-sharp\_projects\FaceDetection\obj\Debug\FaceDetection.pdb
+C:\Users\glasspaper\Documents\c-sharp\_projects\FaceDetection\bin\Debug\Microsoft.Azure.CognitiveServices.Vision.Face.dll
+C:\Users\glasspaper\Documents\c-sharp\_projects\FaceDetection\bin\Debug\Microsoft.Rest.ClientRuntime.Azure.dll
+C:\Users\glasspaper\Documents\c-sharp\_projects\FaceDetection\bin\Debug\Microsoft.Rest.ClientRuntime.dll
+C:\Users\glasspaper\Documents\c-sharp\_projects\FaceDetection\bin\Debug\Newtonsoft.Json.dll
+C:\Users\glasspaper\Documents\c-sharp\_projects\FaceDetection\bin\Debug\Microsoft.Rest.ClientRuntime.xml
+C:\Users\glasspaper\Documents\c-sharp\_projects\FaceDetection\bin\Debug\Microsoft.Rest.ClientRuntime.Azure.xml
+C:\Users\glasspaper\Documents\c-sharp\_projects\FaceDetection\bin\Debug\Newtonsoft.Json.xml
+C:\Users\glasspaper\Documents\c-sharp\_projects\FaceDetection\obj\Debug\FaceDetection.csproj.CopyComplete
