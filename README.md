@@ -6,6 +6,8 @@ Input image containing a human face read from local disk.
 
 JSON output to console and file
 
+
+
 [
    {
       "faceId": "971626a9-89ee-4c6f-bd4f-6517627c9c6c",
