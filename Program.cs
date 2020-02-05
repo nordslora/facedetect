@@ -6,8 +6,11 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-// https://docs.microsoft.com/en-us/azure/cognitive-services/face/quickstarts/csharp
+// 2020-02-05 TL edit
 // Quickstart: Detect faces in an image using the Face REST API and C#
+// https://docs.microsoft.com/en-us/azure/cognitive-services/face/quickstarts/csharp
+// Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.
+
 
 namespace DetectFace
 {
@@ -19,17 +22,18 @@ namespace DetectFace
         {
             // Get the path and filename to process from the user.
             Console.WriteLine("Detect faces:");
-            // Console.Write(
-            //     "Enter the path to an image with faces that you wish to analyze: ");
+            // Console.Write("Enter the path to an image with faces that you wish to analyze: ");
             // string imageFilePath = Console.ReadLine();
-            //string imageFilePath = "c:\man.jpg";
-            var imageFilePath = @"c:\man.jpg";
+            var imageFilePath = @"c:\woman.jpg";
             Console.WriteLine(imageFilePath);
-
+            FileInfo fi = new FileInfo(imageFilePath);
             if (File.Exists(imageFilePath))
             {
                 try
                 {
+                    Console.WriteLine("\nInput file exists.\n");
+                    double size = fi.Length;
+                    Console.WriteLine("File Size in Bytes: {0}", size);
                     MakeAnalysisRequest(imageFilePath);
                     Console.WriteLine("\nWait a moment for the results to appear.\n");
                 }
@@ -70,8 +74,7 @@ namespace DetectFace
                 // This example uses content type "application/octet-stream".
                 // The other content types you can use are "application/json"
                 // and "multipart/form-data".
-                content.Headers.ContentType =
-                    new MediaTypeHeaderValue("application/octet-stream");
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
                 // Execute the REST API call.
                 response = await client.PostAsync(uri, content);
@@ -80,7 +83,7 @@ namespace DetectFace
                 Console.WriteLine("Response: " + response);
                 // Get the JSON response.
                 string contentString = await response.Content.ReadAsStringAsync();
-                Console.WriteLine("\nContentString:\n"); 
+                Console.WriteLine("\nContentString:\n");
                 Console.WriteLine(contentString);
                 // Display the JSON response.
                 Console.WriteLine("\nResponse:\n");
