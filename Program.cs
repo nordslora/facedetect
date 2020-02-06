@@ -18,8 +18,9 @@ namespace DetectFace
 {
     class Program
     {
-        const string subscriptionKey = "527c05ceeb5441c182d8050d62a33710";
-        const string uriBase = "https://tryneanalyser.cognitiveservices.azure.com/face/v1.0/detect";
+        const string subscriptionKey = "your key here"; // replace text with your key 
+        const string uriBase = "https://xxx.cognitiveservices.azure.com/face/v1.0/detect";
+        // replace xxx with your endpoint
         static void Main(string[] args)
         {
             // Get the path and filename to process from the user.
